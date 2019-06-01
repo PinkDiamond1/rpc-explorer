@@ -198,7 +198,7 @@ router.get("/api/current-supply-sats", function apiCurrentSupplySats(req, res) {
 });
 
 
-function getBTCCInfo(cb) {
+function getTNETInfo(cb) {
         var data = {};
         // Get: Current Supply
         getTotalCoins(function(err, totalcoins) {
@@ -213,7 +213,7 @@ function getBTCCInfo(cb) {
                  return cb(500);
               }
               data['difficulty'] = diff;
-	      // Get: exchange rate BTCC_BTC (Cryptobridge)
+	      // Get: exchange rate TNET_BTC (Cryptobridge)
 	      if (!(global.exchangeRate > 0)) {
                  return cb(500);
               }
@@ -240,7 +240,7 @@ function getBTCCInfo(cb) {
 var lastTotalInfoCacheTime = Date.now();
 var lastTotalCache = null;
 var totalCacheLifetimeSeconds = 10; // seconds
-function getCacheBTCCInfo(cb) {
+function getCacheTNETInfo(cb) {
     if (lastTotalCache !== null) {
         if (Date.now() - lastTotalInfoCacheTime < totalCacheLifetimeSeconds * 1000) {
 	     // alive
@@ -248,7 +248,7 @@ function getCacheBTCCInfo(cb) {
         }
    }
 
-   getBTCCInfo(function(err, info) {
+   getTNETInfo(function(err, info) {
       if (!err) {
         lastTotalCache = info;
         lastTotalInfoCacheTime = Date.now();
@@ -258,7 +258,7 @@ function getCacheBTCCInfo(cb) {
 }
 
 router.get("/api/get-info", function apiGetInfo(req, res) {
-        getCacheBTCCInfo(function apiGetInfoInner(err, info) {
+        getCacheTNETInfo(function apiGetInfoInner(err, info) {
             if (err) {
                 return res.status(500).send("{}");
             }

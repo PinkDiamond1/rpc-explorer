@@ -13,25 +13,25 @@ function postForkBlockReward(blockHeight) {
 }
 
 module.exports = {
-	name:"BitcoinCore",
-	logoUrl:"/img/logo/btcc.png",
-	siteTitle:"BitcoinCore (BTCC) Explorer",
-	siteDescriptionHtml:"<b>BTCC Explorer</b> is <a href='https://github.com/janoside/btc-rpc-explorer). If you run your own [Bitcoin Full Node](https://bitcoin.org/en/full-node), **BTC Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/janoside/btc-rpc-explorer) for a list of features and instructions for running.",
-	nodeTitle:"BitcoinCore Full Node",
-	nodeUrl:"https://github.com/bitcoin-cored/bitcoin-cored",
+	name:"Title Network",
+	logoUrl:"/img/logo/tnet.png",
+	siteTitle:"Title Network (TNET) Explorer",
+	siteDescriptionHtml:"<b>TNET Explorer</b> is <a href='https://github.com/janoside/btc-rpc-explorer). If you run your own [Bitcoin Full Node](https://bitcoin.org/en/full-node), **BTC Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/janoside/btc-rpc-explorer) for a list of features and instructions for running.",
+	nodeTitle:"Title Network Full Node",
+	nodeUrl:"https://github.com/title-network/title-network",
 	demoSiteUrl: "https://btc.chaintools.io",
 	currencyUnits:[
 		{
-			name:"BTCC",
+			name:"TNET",
 			multiplier:1,
 			default:true,
-			values:["", "btcc", "BTCC"],
+			values:["", "tnet", "TNET"],
 			decimalPlaces:8
 		},
 		{
-			name:"mBTCC",
+			name:"mTNET",
 			multiplier:1000,
-			values:["mbtcc"],
+			values:["mtnet"],
 			decimalPlaces:5
 		},
 		{
@@ -162,7 +162,7 @@ module.exports = {
 			type: "block",
 			date: "2018-05-21",
 			blockHash: "000000000000000d12221fecf8493e7dd27db4a69739eb80cb80d99c6ea2772b",
-			note: "BTCC was baptised.",
+			note: "BTCC (TNET now) was baptised.",
 			referenceUrl: "https://truevisionofsatoshi.com/"
 		},
 	],
@@ -173,7 +173,7 @@ module.exports = {
                         // DISABLING TILL LISTED
                         // return -1;
                         for (var i = 0; i < responseBody.length; i++) {
-                            if (responseBody[i].id === 'BTCC_BTC') {
+                            if (responseBody[i].id === 'TNET_BTC') {
                                 return responseBody[i].last;
                             }
                         }
