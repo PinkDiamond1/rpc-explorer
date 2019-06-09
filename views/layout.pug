@@ -69,8 +69,10 @@ html
 			ul(class="nav")
 				li(class="nav-item")
 					a(href="/node-status", class="nav-link") Node Status
-				li(class="nav-item")
-					a(href="/rpc-browser", class="nav-link") RPC Browser
+				if (!env.demoSite)
+					li(class="nav-item")
+						a(href="/rpc-browser", class="nav-link") RPC Browser
+				if (!env.demoSite)
 				li(class="nav-item")
 					a(href="/rpc-terminal", class="nav-link") RPC Terminal
 				li(class="nav-item")

@@ -604,7 +604,6 @@ module.exports = {
 	getRawTransaction: getRawTransaction,
 	getRawTransactions: getRawTransactions,
 	getMempoolStats: getMempoolStats,
-	getUptimeSeconds: getUptimeSeconds,
 	getHelp: getHelp,
 	getRpcMethodHelp: getRpcMethodHelp,
 	getHistoricalData: getHistoricalData,
