@@ -266,11 +266,6 @@ router.get("/api/get-info", function apiGetInfo(req, res) {
        });
 });
 
-
-
-
-// DISABLE
-if (0)
 router.get("/node-status", function(req, res) {
 	var client = global.client;
 
@@ -280,19 +275,11 @@ router.get("/node-status", function(req, res) {
 		rpcApi.getNetworkInfo().then(function(getnetworkinfo) {
 			res.locals.getnetworkinfo = getnetworkinfo;
 
-			rpcApi.getUptimeSeconds().then(function(uptimeSeconds) {
-				res.locals.uptimeSeconds = uptimeSeconds;
+			rpcApi.getNetTotals().then(function(getnettotals) {
+				res.locals.getnettotals = getnettotals;
 
-				rpcApi.getNetTotals().then(function(getnettotals) {
-					res.locals.getnettotals = getnettotals;
+				res.render("node-status");
 
-					res.render("node-status");
-
-				}).catch(function(err) {
-					res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-
-					res.render("node-status");
-				});
 			}).catch(function(err) {
 				res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
 
