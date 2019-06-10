@@ -16,8 +16,8 @@ Copy content from [./btc-explorer.com.conf](./btc-explorer.com.conf) into `/etc/
     certbot --nginx -d btc-explorer.com
     cd /etc/ssl/certs
     openssl dhparam -out dhparam.pem 4096
-    cd /home/bitcoin
-    git clone https://github.com/janoside/btc-rpc-explorer.git
-    cd /home/bitcoin/btc-rpc-explorer
+    cd /home
+    git clone https://github.com/title-network/be.git
+    cd /home/be
     npm install
     pm2 start bin/www --name "btc-rpc-explorer"

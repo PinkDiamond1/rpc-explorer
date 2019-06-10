@@ -309,7 +309,7 @@ router.get("/mempool-summary", function(req, res) {
 			res.render("mempool-summary");
 		});
 	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to Bitcoin Node at " + env.rpc.host + ":" + env.rpc.port;
+		res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
 
 		res.render("mempool-summary");
 	});
@@ -419,7 +419,7 @@ router.get("/blocks", function(req, res) {
 			res.render("blocks");
 		});
 	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to Bitcoin Node at " + env.rpc.host + ":" + env.rpc.port;
+		res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
 
 		res.render("blocks");
 	});

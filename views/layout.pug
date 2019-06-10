@@ -102,11 +102,11 @@ html
 							dl
 								dt Source
 								dd
-									a(href="https://github.com/janoside/btc-rpc-explorer") github.com/janoside/btc-rpc-explorer
+									a(href="https://github.com/title-network/be") github.com/title-network/be
 
 								dt Running Version
 								dd
-									a(href=("https://github.com/janoside/btc-rpc-explorer/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
+									a(href=("https://github.com/title-network/be/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
 									span(style="color: #ccc;")  (#{sourcecodeDate})
 
 								if (env.demoSite)
@@ -118,10 +118,10 @@ html
 											a(href="https://btc-explorer.chaintools.io") https://btc-explorer.chaintools.io
 										
 										div(class="mt-2")
-											- var demoSiteCoins = ["BTC", "LTC"];
+											- var demoSiteCoins = ["BTC", "LTC", "TNET"];
 											each demoSiteCoin in demoSiteCoins
 												a(href=coinConfigs[demoSiteCoin].demoSiteUrl, class="mr-2")
-													img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".svg"))
+													img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".png"))
 
 											a(href="https://lightning.chaintools.io", class="mr-2")
 												img(src=("/img/logo/lightning.svg"), style="width: 32px; height: 32px;")
