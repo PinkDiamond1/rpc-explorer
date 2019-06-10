@@ -77,11 +77,11 @@ function getNetTotals() {
 	});
 }
 
-function getMempoolInfo() {
+function getMiningInfo() {
 	return new Promise(function(resolve, reject) {
-		client.command('getmempoolinfo', function(err, result, resHeaders) {
+		client.command('getmininginfo', function(err, result, resHeaders) {
 			if (err) {
-				console.log("Error 23407rhwe07fg: " + err);
+				console.log("Error jlksadjfiolho: " + err);
 
 				reject(err);
 
@@ -93,11 +93,11 @@ function getMempoolInfo() {
 	});
 }
 
-function getUptimeSeconds() {
+function getMempoolInfo() {
 	return new Promise(function(resolve, reject) {
-		client.command('uptime', function(err, result, resHeaders) {
+		client.command('getmempoolinfo', function(err, result, resHeaders) {
 			if (err) {
-				console.log("Error 3218y6gr3986sdd: " + err);
+				console.log("Error 23407rhwe07fg: " + err);
 
 				reject(err);
 
@@ -609,8 +609,9 @@ module.exports = {
 	getGenesisCoinbaseTransactionId: getGenesisCoinbaseTransactionId,
 	getBlockchainInfo: getBlockchainInfo,
 	getNetworkInfo: getNetworkInfo,
-        getDifficulty: getDifficulty,
+	getDifficulty: getDifficulty,
 	getNetTotals: getNetTotals,
+	getMiningInfo: getMiningInfo,
 	getMempoolInfo: getMempoolInfo,
 	getBlockByHeight: getBlockByHeight,
 	getBlocksByHeight: getBlocksByHeight,
@@ -620,7 +621,6 @@ module.exports = {
 	getRawTransaction: getRawTransaction,
 	getRawTransactions: getRawTransactions,
 	getMempoolStats: getMempoolStats,
-	getUptimeSeconds: getUptimeSeconds,
 	getHelp: getHelp,
 	getRpcMethodHelp: getRpcMethodHelp,
 	getHistoricalData: getHistoricalData,
