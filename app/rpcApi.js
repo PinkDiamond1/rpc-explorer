@@ -93,22 +93,6 @@ function getMempoolInfo() {
 	});
 }
 
-function getUptimeSeconds() {
-	return new Promise(function(resolve, reject) {
-		client.command('uptime', function(err, result, resHeaders) {
-			if (err) {
-				console.log("Error 3218y6gr3986sdd: " + err);
-
-				reject(err);
-
-				return;
-			}
-
-			resolve(result);
-		});
-	});
-}
-
 function getMempoolStats() {
 	return new Promise(function(resolve, reject) {
 		client.command('getrawmempool', true, function(err, result, resHeaders) {
@@ -620,7 +604,6 @@ module.exports = {
 	getRawTransaction: getRawTransaction,
 	getRawTransactions: getRawTransactions,
 	getMempoolStats: getMempoolStats,
-	getUptimeSeconds: getUptimeSeconds,
 	getHelp: getHelp,
 	getRpcMethodHelp: getRpcMethodHelp,
 	getHistoricalData: getHistoricalData,

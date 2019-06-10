@@ -4,11 +4,11 @@ module.exports = {
 	coin: "TNET",
 
 	listen:{
-		port:3002
+		port:5002
 	},
 
 	rpcBlacklist:[
-	        "getblockchaininfo",
+		"getblockchaininfo",
 		"stop",
 		"stop",
 		"savemempool",

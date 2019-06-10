@@ -266,11 +266,6 @@ router.get("/api/get-info", function apiGetInfo(req, res) {
        });
 });
 
-
-
-
-// DISABLE
-if (0)
 router.get("/node-status", function(req, res) {
 	var client = global.client;
 
@@ -280,19 +275,11 @@ router.get("/node-status", function(req, res) {
 		rpcApi.getNetworkInfo().then(function(getnetworkinfo) {
 			res.locals.getnetworkinfo = getnetworkinfo;
 
-			rpcApi.getUptimeSeconds().then(function(uptimeSeconds) {
-				res.locals.uptimeSeconds = uptimeSeconds;
+			rpcApi.getNetTotals().then(function(getnettotals) {
+				res.locals.getnettotals = getnettotals;
 
-				rpcApi.getNetTotals().then(function(getnettotals) {
-					res.locals.getnettotals = getnettotals;
+				res.render("node-status");
 
-					res.render("node-status");
-
-				}).catch(function(err) {
-					res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-
-					res.render("node-status");
-				});
 			}).catch(function(err) {
 				res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
 
@@ -322,13 +309,12 @@ router.get("/mempool-summary", function(req, res) {
 			res.render("mempool-summary");
 		});
 	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to Bitcoin Node at " + env.rpc.host + ":" + env.rpc.port;
+		res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
 
 		res.render("mempool-summary");
 	});
 });
 
-if (0)
 router.post("/connect", function(req, res) {
 	var host = req.body.host;
 	var port = req.body.port;
@@ -361,7 +347,6 @@ router.post("/connect", function(req, res) {
 	res.redirect("/");
 });
 
-if (0)
 router.get("/disconnect", function(req, res) {
 	res.cookie('rpc-host', "");
 	res.cookie('rpc-port', "");
@@ -381,7 +366,6 @@ router.get("/disconnect", function(req, res) {
 	res.redirect("/");
 });
 
-if (0)
 router.get("/changeSetting", function(req, res) {
 	if (req.query.name) {
 		req.session[req.query.name] = req.query.value;
@@ -435,7 +419,7 @@ router.get("/blocks", function(req, res) {
 			res.render("blocks");
 		});
 	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to Bitcoin Node at " + env.rpc.host + ":" + env.rpc.port;
+		res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
 
 		res.render("blocks");
 	});
@@ -687,7 +671,6 @@ router.get("/address/:address", function(req, res) {
 	});
 });
 
-if (0)
 router.get("/rpc-terminal", function(req, res) {
 	if (!env.demoSite) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -703,7 +686,6 @@ router.get("/rpc-terminal", function(req, res) {
 	res.render("terminal");
 });
 
-if (0)
 router.post("/rpc-terminal", function(req, res) {
 	if (!env.demoSite) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -762,7 +744,6 @@ router.post("/rpc-terminal", function(req, res) {
 	});
 });
 
-if (0)
 router.get("/rpc-browser", function(req, res) {
 	if (!env.demoSite) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
