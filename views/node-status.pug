@@ -58,18 +58,17 @@ block content
 									span(class="text-muted")  (#{fraction} #{item.name})
 
 				tr
-					- var scales = [ {val:1000000000000000, name:"PH/s"}, {val:1000000000000, name:"TH/s"}, {val:1000000000, name:"GH/s"}, {val:1000000, name:"MH/s"}, {val:1000, name:"KH/s"} ];
+					- var scales = [ {val:1000000000000000, name:"PH/s"}, {val:1000000000000, name:"TH/s"}, {val:1000000000, name:"GH/s"}, {val:1000000, name:"MH/s"}, {val:1000, name:"KH/s"}, {val:1, name:"H/s"} ];
 					- var scaleDone = false;
 					th(class="table-active properties-header") Network hashrate
 					td(class="monospace")
+						span #{parseFloat(getmininginfo.networkhashps).toLocaleString()} H/s
 						each item in scales
 							if (!scaleDone)
 								- var fraction = Math.floor(getmininginfo.networkhashps / item.val);
 								if (fraction >= 1)
 									- scaleDone = true;
 									span(class="text-muted")  (#{fraction} #{item.name})
-								else
-									span #{getmininginfo.networkhashps} H/s
 
 				tr
 					th(class="table-active properties-header") Status
