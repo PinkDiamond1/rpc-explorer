@@ -77,3 +77,8 @@ footer a {
 footer a:hover {
 	color: white;
 }
+
+footer .coin-logo {
+	height: 64px;
+	width: auto;
+}

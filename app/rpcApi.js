@@ -77,6 +77,22 @@ function getNetTotals() {
 	});
 }
 
+function getMiningInfo() {
+	return new Promise(function(resolve, reject) {
+		client.command('getmininginfo', function(err, result, resHeaders) {
+			if (err) {
+				console.log("Error jlksadjfiolho: " + err);
+
+				reject(err);
+
+				return;
+			}
+
+			resolve(result);
+		});
+	});
+}
+
 function getMempoolInfo() {
 	return new Promise(function(resolve, reject) {
 		client.command('getmempoolinfo', function(err, result, resHeaders) {
@@ -593,8 +609,9 @@ module.exports = {
 	getGenesisCoinbaseTransactionId: getGenesisCoinbaseTransactionId,
 	getBlockchainInfo: getBlockchainInfo,
 	getNetworkInfo: getNetworkInfo,
-        getDifficulty: getDifficulty,
+	getDifficulty: getDifficulty,
 	getNetTotals: getNetTotals,
+	getMiningInfo: getMiningInfo,
 	getMempoolInfo: getMempoolInfo,
 	getBlockByHeight: getBlockByHeight,
 	getBlocksByHeight: getBlocksByHeight,
