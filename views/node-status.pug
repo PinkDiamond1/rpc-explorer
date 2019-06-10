@@ -22,10 +22,6 @@ block content
 		if (true)
 			table(class="table")
 				tr
-					th(class="table-active properties-header") Host : Port
-					td(class="monospace") #{env.rpc.host + " : " + env.rpc.port}
-
-				tr
 					th(class="table-active properties-header") Chain
 					td(class="monospace") #{getblockchaininfo.chain}
 				tr
@@ -60,6 +56,20 @@ block content
 								if (fraction >= 1)
 									- scaleDone = true;
 									span(class="text-muted")  (#{fraction} #{item.name})
+
+				tr
+					- var scales = [ {val:1000000000000000, name:"PH/s"}, {val:1000000000000, name:"TH/s"}, {val:1000000000, name:"GH/s"}, {val:1000000, name:"MH/s"}, {val:1000, name:"KH/s"} ];
+					- var scaleDone = false;
+					th(class="table-active properties-header") Network hashrate
+					td(class="monospace")
+						each item in scales
+							if (!scaleDone)
+								- var fraction = Math.floor(getmininginfo.networkhashps / item.val);
+								if (fraction >= 1)
+									- scaleDone = true;
+									span(class="text-muted")  (#{fraction} #{item.name})
+								else
+									span #{getmininginfo.networkhashps} H/s
 
 				tr
 					th(class="table-active properties-header") Status
