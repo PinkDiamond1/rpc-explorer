@@ -8,8 +8,9 @@ block content
 	hr
 
 	if (getmempoolinfo)
-		p Data from RPC command  
-			a(href="/rpc-browser?method=getmempoolinfo") getmempoolinfo
+		if (env.demoSite)
+			p Data from RPC command  
+				a(href="/rpc-browser?method=getmempoolinfo") getmempoolinfo
 			
 		table(class="table")
 			tr
