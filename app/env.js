@@ -7,6 +7,24 @@ module.exports = {
 		port:5002
 	},
 
+	pages:{
+		nodeStatus: true,
+		rpcBrowser: false,
+		rpcTerminal: false,
+		mempool: true,
+		fun: true
+	},
+
+	// Edit "rpc" below to target your node.
+	// You may delete this section if you wish to connect manually via the UI.
+
+	rpc: {
+		host:"127.0.0.1",
+		port:10332,
+		username:"rpc-username",
+		password:"rpc-password"
+	},
+
 	rpcBlacklist:[
 		"getblockchaininfo",
 		"stop",
@@ -27,16 +45,6 @@ module.exports = {
 		"walletpassphrase",
 		"walletpassphrasechange"
 	],
-
-	// Edit "rpc" below to target your node.
-	// You may delete this section if you wish to connect manually via the UI.
-
-	rpc: {
-		host:"127.0.0.1",
-		port:10332,
-		username:"rpc-username",
-		password:"rpc-password"
-	},
 
 	// Edit "ipWhitelistForRpcCommands" regex to limit access to RPC Browser / Terminal to matching IPs
 	ipWhitelistForRpcCommands:/^(127\.0\.0\.1)?(\:\:1)?$/,

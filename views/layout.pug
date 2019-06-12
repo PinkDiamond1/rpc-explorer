@@ -67,17 +67,19 @@ html
 										
 		div(id="sub-menu", class="container mb-4", style="margin-top: -1.0rem;")
 			ul(class="nav")
-				li(class="nav-item")
-					a(href="/node-status", class="nav-link") Node Status
-				if (env.demoSite)
+				if (env.pages.nodeStatus)
+					li(class="nav-item")
+						a(href="/node-status", class="nav-link") Node Status
+				if (env.pages.rpcBrowser)
 					li(class="nav-item")
 						a(href="/rpc-browser", class="nav-link") RPC Browser
-				if (env.demoSite)
+				if (env.pages.rpcTerminal)
 					li(class="nav-item")
 						a(href="/rpc-terminal", class="nav-link") RPC Terminal
-				li(class="nav-item")
-					a(href="/mempool-summary", class="nav-link") Mempool Summary
-				if (coinConfig.historicalData && coinConfig.historicalData.length > 0)
+				if (env.pages.mempool)
+					li(class="nav-item")
+						a(href="/mempool-summary", class="nav-link") Mempool Summary
+				if (coinConfig.historicalData && coinConfig.historicalData.length > 0 && env.pages.fun)
 					li(class="nav-item")
 						a(href="/fun", class="nav-link") #{coinConfig.name} Fun
 				li(class="nav-item")
