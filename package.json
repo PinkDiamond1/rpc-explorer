@@ -35,7 +35,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/title-network/be.git"
+    "url": "git+https://github.com/title-network/rpc-explorer.git"
   },
   "keywords": [
     "TitleNetwork",
@@ -46,7 +46,7 @@
   "author": "TitleNetwork",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/title-network/be/issues"
+    "url": "https://github.com/title-network/rpc-explorer/issues"
   },
-  "homepage": "https://github.com/title-network/be#readme"
+  "homepage": "https://github.com/title-network/rpc-explorer#readme"
 }

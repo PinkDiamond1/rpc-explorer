@@ -16,7 +16,7 @@ module.exports = {
 	name:"Title Network",
 	logoUrl:"/img/logo/tnet.png",
 	siteTitle:"Title Network (TNET) Explorer",
-	siteDescriptionHtml:"<b>TNET Explorer</b> is <a href='https://github.com/title-network/be). If you run your own [TitleNetwork Full Node](https://github.com/title-network/title-network/releases), **TNET Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/title-network/be) for a list of features and instructions for running.",
+	siteDescriptionHtml:"<b>TNET Explorer</b> is <a href='https://github.com/title-network/rpc-explorer). If you run your own [TitleNetwork Full Node](https://github.com/title-network/title-network/releases), **TNET Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/title-network/rpc-explorer) for a list of features and instructions for running.",
 	nodeTitle:"Title Network Full Node",
 	nodeUrl:"https://github.com/title-network/title-network",
 	demoSiteUrl: "https://btc.chaintools.io",
