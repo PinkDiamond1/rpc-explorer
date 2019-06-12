@@ -18,7 +18,7 @@ block content
 				th(class="table-active properties-header") Version
 				th(class="table-active properties-header") UserAgent
 			each item in getpeerinfo
-                tr
+				tr
 					td(class="monospace") #{item.addr}
 					td(class="monospace") #{item.version}
 					td(class="monospace") #{item.subver}
