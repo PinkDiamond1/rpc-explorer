@@ -62,7 +62,7 @@ block content
 					span #{parseFloat(getmininginfo.networkhashps).toLocaleString()} H/s
 					each item in scales
 						if (!scaleDone)
-							- var fraction = Math.floor(getmininginfo.networkhashps / item.val);
+							- var fraction = (getmininginfo.networkhashps / item.val).toFixed(2);
 							if (fraction >= 1)
 								- scaleDone = true;
 								span(class="text-muted")  (#{fraction} #{item.name})
