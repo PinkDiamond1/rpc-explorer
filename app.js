@@ -205,7 +205,7 @@ app.use('/', baseActionsRouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
-	var err = new Error('404: Page not Found');
+	var err = new Error('404: Page not found');
 	err.status = 404;
 	next(err);
 });
