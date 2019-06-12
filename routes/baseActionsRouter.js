@@ -267,61 +267,72 @@ router.get("/api/get-info", function apiGetInfo(req, res) {
 });
 
 router.get("/node-status", function(req, res) {
-	var client = global.client;
+	if (env.pages.nodeStatus) {
+		var client = global.client;
 
-	rpcApi.getBlockchainInfo().then(function(getblockchaininfo) {
-		res.locals.getblockchaininfo = getblockchaininfo;
+		rpcApi.getBlockchainInfo().then(function(getblockchaininfo) {
+			res.locals.getblockchaininfo = getblockchaininfo;
 
-		rpcApi.getNetworkInfo().then(function(getnetworkinfo) {
-			res.locals.getnetworkinfo = getnetworkinfo;
+			rpcApi.getNetworkInfo().then(function(getnetworkinfo) {
+				res.locals.getnetworkinfo = getnetworkinfo;
 
-			rpcApi.getNetTotals().then(function(getnettotals) {
-				res.locals.getnettotals = getnettotals;
+				rpcApi.getNetTotals().then(function(getnettotals) {
+					res.locals.getnettotals = getnettotals;
 				
-				rpcApi.getMiningInfo().then(function(getmininginfo) {
-					res.locals.getmininginfo = getmininginfo;
+					rpcApi.getMiningInfo().then(function(getmininginfo) {
+						res.locals.getmininginfo = getmininginfo;
+						res.render("node-status");
 
-					res.render("node-status");
+					}).catch(function(err) {
+						res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
+						res.render("node-status");
+					});
 
 				}).catch(function(err) {
 					res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-	
 					res.render("node-status");
 				});
-
+			
 			}).catch(function(err) {
-				res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-
-				res.render("node-status");
+			res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
+			res.render("node-status");
 			});
+	
 		}).catch(function(err) {
 			res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-
 			res.render("node-status");
 		});
-	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
-
-		res.render("node-status");
-	});
+	} else {
+		res.status(404);
+		res.render('error', {
+			message: "Page not found",
+			error: {}
+		});
+	}
 });
 
 router.get("/mempool-summary", function(req, res) {
-	var client = global.client;
+	if (env.pages.mempool) {
+		var client = global.client;
 
-	rpcApi.getMempoolInfo().then(function(getmempoolinfo) {
-		res.locals.getmempoolinfo = getmempoolinfo;
+		rpcApi.getMempoolInfo().then(function(getmempoolinfo) {
+			res.locals.getmempoolinfo = getmempoolinfo;
 
-		rpcApi.getMempoolStats().then(function(mempoolstats) {
-			res.locals.mempoolstats = mempoolstats;
-
+			rpcApi.getMempoolStats().then(function(mempoolstats) {
+				res.locals.mempoolstats = mempoolstats;
+				res.render("mempool-summary");
+			});
+		}).catch(function(err) {
+			res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
 			res.render("mempool-summary");
 		});
-	}).catch(function(err) {
-		res.locals.userMessage = "Unable to connect to TitleNetwork Node at " + env.rpc.host + ":" + env.rpc.port;
-
-		res.render("mempool-summary");
-	});
+	} else {
+		res.status(404);
+		res.render('error', {
+			message: "Page not found",
+			error: {}
+		});
+	}
 });
 
 router.post("/connect", function(req, res) {
@@ -681,28 +692,33 @@ router.get("/address/:address", function(req, res) {
 });
 
 router.get("/rpc-terminal", function(req, res) {
-	if (!env.demoSite) {
+	if (!env.pages.rpcTerminal) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		var match = env.ipWhitelistForRpcCommands.exec(ip);
 
 		if (!match) {
-			res.send("RPC Terminal / Browser may not be accessed from '" + ip + "'. This restriction can be modified in your env.js file.");
-
+			res.status(404);
+			res.render('error', {
+				message: "Page not found",
+				error: {}
+				});
 			return;
 		}
 	}
-
 	res.render("terminal");
 });
 
 router.post("/rpc-terminal", function(req, res) {
-	if (!env.demoSite) {
+	if (!env.pages.rpcTerminal) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		var match = env.ipWhitelistForRpcCommands.exec(ip);
 
 		if (!match) {
-			res.send("RPC Terminal / Browser may not be accessed from '" + ip + "'. This restriction can be modified in your env.js file.");
-
+			res.status(404);
+			res.render('error', {
+				message: "Page not found",
+				error: {}
+				});
 			return;
 		}
 	}
@@ -754,13 +770,16 @@ router.post("/rpc-terminal", function(req, res) {
 });
 
 router.get("/rpc-browser", function(req, res) {
-	if (!env.demoSite) {
+	if (!env.pages.rpcBrowser) {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		var match = env.ipWhitelistForRpcCommands.exec(ip);
 
 		if (!match) {
-			res.send("RPC Terminal / Browser may not be accessed from '" + ip + "'. This restriction can be modified in your env.js file.");
-
+			res.status(404);
+			res.render('error', {
+				message: "Page not found",
+				error: {}
+				});
 			return;
 		}
 	}
@@ -867,9 +886,17 @@ router.get("/about", function(req, res) {
 });
 
 router.get("/fun", function(req, res) {
-	res.locals.historicalData = rpcApi.getHistoricalData();
-	
-	res.render("fun");
+	if (env.pages.fun) {
+		res.locals.historicalData = rpcApi.getHistoricalData();
+		res.render("fun");		
+	} else {
+		res.status(404);
+		res.render('error', {
+			message: "Page not found",
+			error: {}
+			});
+		return;
+	}
 });
 
 module.exports = router;
