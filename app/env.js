@@ -12,7 +12,8 @@ module.exports = {
 		rpcBrowser: false,
 		rpcTerminal: false,
 		mempool: true,
-		fun: true
+		fun: true,
+		peers: true
 	},
 
 	// Edit "rpc" below to target your node.

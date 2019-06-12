@@ -899,4 +899,25 @@ router.get("/fun", function(req, res) {
 	}
 });
 
+router.get("/peers", function(req, res) {
+	if (env.pages.peers) {
+		var client = global.client;
+
+		rpcApi.getPeerInfo().then(function(getpeerinfo) {
+			res.locals.getpeerinfo = getpeerinfo;
+			res.render("peers");
+
+		}).catch(function(err) {
+			res.locals.userMessage = "Unable to connect to node at " + env.rpc.host + ":" + env.rpc.port;
+			res.render("peers");
+		});
+	} else {
+		res.status(404);
+		res.render('error', {
+			message: "404: Page not found",
+			error: {}
+		});
+	}
+});
+
 module.exports = router;

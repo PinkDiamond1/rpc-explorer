@@ -1,0 +1,24 @@
+extends layout
+
+block headContent
+	title Peers
+	
+block content
+	h1(class="h2") Peers
+	hr
+
+	if (getpeerinfo)
+		if (env.demoSite)
+			p Data from RPC commands 
+				a(href="/rpc-browser?method=getpeerinfo") getpeerinfo
+
+		table(class="table")
+			tr
+				th(class="table-active properties-header") IP
+				th(class="table-active properties-header") Version
+				th(class="table-active properties-header") UserAgent
+			each item in getpeerinfo
+                tr
+					td(class="monospace") #{item.addr}
+					td(class="monospace") #{item.version}
+					td(class="monospace") #{item.subver}
