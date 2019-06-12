@@ -13,4 +13,7 @@ if (!isNaN(env.listen.port)) {
 			app.runOnStartup();
 		}
 	});
-} else console.log('Port in app/env.js is not defined correctly.')
+} else {
+	console.log('Port in app/env.js is not defined correctly.');
+	process.exit();
+}
