@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 var express = require('express');
@@ -29,7 +27,6 @@ var qrcode = require("qrcode");
 var baseActionsRouter = require('./routes/baseActionsRouter');
 
 var app = express();
-console.log('#Env:', process.env.NODE_ENV, '- Port:', process.env.PORT || 3002);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
@@ -208,7 +205,7 @@ app.use('/', baseActionsRouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
+	var err = new Error('404: Page not Found');
 	err.status = 404;
 	next(err);
 });
@@ -217,7 +214,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (env.development) {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		res.render('error', {

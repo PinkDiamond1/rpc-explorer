@@ -305,7 +305,7 @@ router.get("/node-status", function(req, res) {
 	} else {
 		res.status(404);
 		res.render('error', {
-			message: "Page not found",
+			message: "404: Page not found",
 			error: {}
 		});
 	}
@@ -329,7 +329,7 @@ router.get("/mempool-summary", function(req, res) {
 	} else {
 		res.status(404);
 		res.render('error', {
-			message: "Page not found",
+			message: "404: Page not found",
 			error: {}
 		});
 	}
@@ -699,7 +699,7 @@ router.get("/rpc-terminal", function(req, res) {
 		if (!match) {
 			res.status(404);
 			res.render('error', {
-				message: "Page not found",
+				message: "404: Page not found",
 				error: {}
 				});
 			return;
@@ -716,7 +716,7 @@ router.post("/rpc-terminal", function(req, res) {
 		if (!match) {
 			res.status(404);
 			res.render('error', {
-				message: "Page not found",
+				message: "404: Page not found",
 				error: {}
 				});
 			return;
@@ -777,7 +777,7 @@ router.get("/rpc-browser", function(req, res) {
 		if (!match) {
 			res.status(404);
 			res.render('error', {
-				message: "Page not found",
+				message: "404: Page not found",
 				error: {}
 				});
 			return;
@@ -892,7 +892,7 @@ router.get("/fun", function(req, res) {
 	} else {
 		res.status(404);
 		res.render('error', {
-			message: "Page not found",
+			message: "404: Page not found",
 			error: {}
 			});
 		return;

@@ -54,4 +54,6 @@ module.exports = {
 		
 		"TNET":{address:"15SghANf14BiH6MDV7ZikD8jmjBkWwYq7e", urlPrefix:"tnet:"}
 	},
+
+	development: false,
 };
