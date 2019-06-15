@@ -70,9 +70,11 @@ block content
 				th(class="table-active properties-header") Status
 				td(class="monospace")
 					if (getblockchaininfo.initialblockdownload || getblockchaininfo.headers > getblockchaininfo.blocks)
+						img(src="img/sync.png", alt="")
 						span Initial block download progress #{(100 * getblockchaininfo.verificationprogress).toLocaleString()}%
 					else
-						span Synchronized with network
+						img(src="img/done.png", alt="")
+						span  Synchronized with network
 			tr
 				th(class="table-active properties-header") Network Traffic
 				td(class="monospace")
