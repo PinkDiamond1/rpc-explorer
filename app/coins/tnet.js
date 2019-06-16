@@ -169,7 +169,7 @@ module.exports = {
 	],
     exchangeRateData:{
 		jsonUrl:"https://www.southxchange.com/api/price/TNET/BTC",
-		exchangedCurrencyName:"btc",
+		exchangedCurrencyName:"BTC",
         responseBodySelectorFunction:function(responseBody) {
 			if (responseBody.Last) {
 				return responseBody.Last;
