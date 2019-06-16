@@ -1,12 +1,9 @@
 extends layout
 
 block headContent
-	title Home
+	title Latest Blocks
 	
 block content
-	h1(class="h2") #{coinConfig.siteTitle}
-	hr
-
 	if (env.demoSite)
 		div(class="alert alert-primary", role="alert")
 			p(class="lead")
