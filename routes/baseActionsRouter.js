@@ -213,11 +213,11 @@ function getTNETInfo(cb) {
                  return cb(500);
               }
               data['difficulty'] = diff;
-	      // Get: exchange rate TNET_BTC (Cryptobridge)
+	      // Get: exchange rate TNET_BTC (southXchange)
 	      if (!(global.exchangeRate > 0)) {
                  return cb(500);
               }
-              data['btcc_btc'] = global.exchangeRate;
+              data['tnet_btc'] = global.exchangeRate;
               // Get: exchange rate BTC_USD (CMC)
               request.get('https://api.coinmarketcap.com/v2/ticker/1/?convert=USD')
 		.end(function (err, res) {
@@ -227,7 +227,7 @@ function getTNETInfo(cb) {
                     }
 		    var market = res.body.data.quotes.USD.price;
 		    data['btc_usd'] = market;
-                    data['btcc_usd'] = parseFloat((parseFloat(market, 10) * parseFloat(data['btcc_btc'], 10)).toFixed(2), 10);
+                    data['btcc_usd'] = parseFloat((parseFloat(market, 10) * parseFloat(data['tnet_btc'], 10)).toFixed(2), 10);
 		    // FINNN
                     data['lastupdate'] = parseInt(Date.now() / 1e3, 10);
                     cb(null, data);
