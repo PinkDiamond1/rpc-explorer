@@ -69,7 +69,7 @@ function refreshExchangeRate() {
 					global.exchangeRate = exchangeRate;
 					global.exchangeRateUpdateTime = new Date();
 
-					console.log("Using exchange rate: " + global.exchangeRate + " USD/" + coins[env.coin].name + " starting at " + global.exchangeRateUpdateTime);
+					console.log("Using exchange rate: " + global.exchangeRate + " " + coins[env.coin].exchangeRateData.exchangedCurrencyName + "/" + coins[env.coin].nameShort + " starting at " + global.exchangeRateUpdateTime);
 
 				} else {
 					console.log("Unable to get exchange rate data");
