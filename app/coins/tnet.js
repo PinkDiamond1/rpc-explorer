@@ -169,23 +169,14 @@ module.exports = {
 	],
     exchangeRateData:{
 		jsonUrl:"https://www.southxchange.com/api/price/TNET/BTC",
-		exchangedCurrencyName:"BTC",
+		exchangedCurrencyName:"btc",
         responseBodySelectorFunction:function(responseBody) {
-			console.log(responseBody);
+			if (responseBody.Last) {
+				return responseBody.Last;
+			}
             return -1;
         }
     },
-	exchangeRateDataCMC:{
-		jsonUrl:"https://api.coinmarketcap.com/v1/ticker/Bitcoin/",
-		exchangedCurrencyName:"usd",
-		responseBodySelectorFunction:function(responseBody) {
-			// DISABLING TILL LISTED
-			if (responseBody[0] && responseBody[0].price_usd) {
-				return responseBody[0].price_usd;
-			}
-			return -1;
-		}
-	},
 	blockRewardFunction:function(blockHeight) {
 		if (+blockHeight >= 588673) {
 			return postForkBlockReward(blockHeight);
