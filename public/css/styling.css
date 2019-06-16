@@ -78,3 +78,12 @@ footer .coin-logo {
 	height: 64px;
 	width: auto;
 }
+
+.nav .nav-item .nav-link {
+	margin: .1rem;
+	background-color: #EEE;
+}
+
+.nav .nav-item .nav-link:hover {
+	background-color: #DDD;
+}
