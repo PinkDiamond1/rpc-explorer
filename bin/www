@@ -3,12 +3,17 @@ var debug = require('debug')('my-application');
 var app = require('../app');
 var env = require("./../app/env");
 
-app.set('port', env.listen.port || 3002);
+if (!isNaN(env.listen.port)) {
+	app.set('port', env.listen.port);
 
-var server = app.listen(app.get('port'), function() {
-	console.log('Express server listening on port ' + server.address().port);
+	var server = app.listen(app.get('port'), function() {
+		console.log('Express server listening on port ' + server.address().port);
 
-	if (app.runOnStartup) {
-		app.runOnStartup();
-	}
-});
+		if (app.runOnStartup) {
+			app.runOnStartup();
+		}
+	});
+} else {
+	console.log('Port in app/env.js is not defined correctly.');
+	process.exit();
+}
