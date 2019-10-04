@@ -14,9 +14,10 @@ function postForkBlockReward(blockHeight) {
 
 module.exports = {
 	name:"Title Network",
+	nameShort: "TNET",
 	logoUrl:"/img/logo/tnet.png",
 	siteTitle:"Title Network (TNET) Explorer",
-	siteDescriptionHtml:"<b>TNET Explorer</b> is <a href='https://github.com/title-network/be). If you run your own [TitleNetwork Full Node](https://github.com/title-network/title-network/releases), **TNET Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/title-network/be) for a list of features and instructions for running.",
+	siteDescriptionHtml:"<b>TNET Explorer</b> is <a href='https://github.com/title-network/rpc-explorer). If you run your own [TitleNetwork Full Node](https://github.com/title-network/title-network/releases), **TNET Explorer** can easily run alongside it, communicating via RPC calls. See the project [ReadMe](https://github.com/title-network/rpc-explorer) for a list of features and instructions for running.",
 	nodeTitle:"Title Network Full Node",
 	nodeUrl:"https://github.com/title-network/title-network",
 	demoSiteUrl: "https://btc.chaintools.io",
@@ -166,35 +167,16 @@ module.exports = {
 			referenceUrl: "https://truevisionofsatoshi.com/"
 		},
 	],
-        exchangeRateData:{
-                jsonUrl:"https://api.crypto-bridge.org/api/v1/ticker",
-                exchangedCurrencyName:"btc",
-                responseBodySelectorFunction:function(responseBody) {
-                        // DISABLING TILL LISTED
-                        // return -1;
-                        for (var i = 0; i < responseBody.length; i++) {
-                            if (responseBody[i].id === 'TNET_BTC') {
-                                return responseBody[i].last;
-                            }
-                        }
-                        // if (responseBody[0] && responseBody[0].price_usd) {
-                        //         return responseBody[0].price_usd;
-                        // }
-                        return -1;
-                }
-        },
-	exchangeRateDataCMC:{
-		jsonUrl:"https://api.coinmarketcap.com/v1/ticker/Bitcoin/",
-		exchangedCurrencyName:"usd",
-		responseBodySelectorFunction:function(responseBody) {
-			// DISABLING TILL LISTED
-			return -1;
-			if (responseBody[0] && responseBody[0].price_usd) {
-				return responseBody[0].price_usd;
+    exchangeRateData:{
+		jsonUrl:"https://www.southxchange.com/api/price/TNET/BTC",
+		exchangedCurrencyName:"BTC",
+        responseBodySelectorFunction:function(responseBody) {
+			if (responseBody.Last) {
+				return responseBody.Last;
 			}
-			return -1;
-		}
-	},
+            return -1;
+        }
+    },
 	blockRewardFunction:function(blockHeight) {
 		if (+blockHeight >= 588673) {
 			return postForkBlockReward(blockHeight);
@@ -204,9 +186,7 @@ module.exports = {
 			var previous = eras[i - 1];
 			eras.push(new Decimal8(previous).dividedBy(2));
 		}
-
 		var index = Math.floor(blockHeight / 210000);
-
 		return eras[index];
 	}
 };

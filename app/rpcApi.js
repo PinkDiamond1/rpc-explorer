@@ -93,6 +93,22 @@ function getMiningInfo() {
 	});
 }
 
+function getPeerInfo() {
+	return new Promise(function(resolve, reject) {
+		client.command('getpeerinfo', function(err, result, resHeaders) {
+			if (err) {
+				console.log("Error fdsferfds: " + err);
+
+				reject(err);
+
+				return;
+			}
+
+			resolve(result);
+		});
+	});
+}
+
 function getMempoolInfo() {
 	return new Promise(function(resolve, reject) {
 		client.command('getmempoolinfo', function(err, result, resHeaders) {
@@ -612,6 +628,7 @@ module.exports = {
 	getDifficulty: getDifficulty,
 	getNetTotals: getNetTotals,
 	getMiningInfo: getMiningInfo,
+	getPeerInfo: getPeerInfo,
 	getMempoolInfo: getMempoolInfo,
 	getBlockByHeight: getBlockByHeight,
 	getBlocksByHeight: getBlocksByHeight,

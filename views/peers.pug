@@ -1,0 +1,27 @@
+extends layout
+
+block headContent
+	title Peers
+	
+block content
+	h1(class="h2") Peers
+	hr
+
+	if (getpeerinfo)
+		if (env.demoSite)
+			p Data from RPC commands 
+				a(href="/rpc-browser?method=getpeerinfo") getpeerinfo
+
+		table(class="table")
+			tr
+				th(class="table-active") IP
+				th(class="table-active") Version
+				th(class="table-active") UserAgent
+				th(class="table-active") Send/Received
+			each item in getpeerinfo
+				tr
+					- var ip = item.addr.split(':')[0];
+					td(class="monospace") #{ip}
+					td(class="monospace") #{item.version}
+					td(class="monospace") #{item.subver}
+					td(class="monospace") #{utils.formatBytes(item.bytessent)} / #{utils.formatBytes(item.bytesrecv)}

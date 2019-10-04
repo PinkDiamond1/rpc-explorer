@@ -8,12 +8,13 @@ We built this tool because we wanted to use it ourself. Whatever reasons one mig
 
 Live demos are available at:
 
-* BTC: https://btc.chaintools.io
-* LTC: https://ltc.chaintools.io
+* BTC: https://btc.chaintools.io (Demo mode ON)
+* TNET: https://explorer.title.network/ (Demo mode OFF)
 
 # Features
 
 * List of recent blocks
+* List of connected peers
 * Browse blocks by height, in ascending or descending order
 * View block details
 * View transaction details, with navigation "backward" via spent transaction outputs
@@ -38,7 +39,7 @@ The below instructions are geared toward TNET, but can be adapted easily to othe
 1. Clone this repo
 2. `npm install` to install all required dependencies
 3. Edit the "rpc" settings in [env.js](app/env.js) to target your node
-4. Optional: Change the "coin" value in [env.js](app/env.js). Currently supported values are "BTC", "LTC" and TNET.
+4. Optional: Change the "coin" value in [env.js](app/env.js). Currently supported values are "BTC", "LTC" and "TNET".
 5. `npm start` to start the local server
 6. Visit http://127.0.0.1:5002/
 

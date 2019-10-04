@@ -5,10 +5,10 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no")
 		
 		link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css", integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4", crossorigin="anonymous")
-		link(rel="stylesheet", href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
-		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Cousine|Ubuntu:400,500,700")
-		link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
+		// link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
 		link(rel='stylesheet', href='/css/styling.css')
+
+		script(src="https://kit.fontawesome.com/313e680327.js")
 
 		link(rel="icon", type="image/png", href=("/img/logo/" + env.coin.toLowerCase() + ".png"))
 
@@ -68,20 +68,41 @@ html
 		div(id="sub-menu", class="container mb-4", style="margin-top: -1.0rem;")
 			ul(class="nav")
 				li(class="nav-item")
-					a(href="/node-status", class="nav-link") Node Status
-				if (env.demoSite)
+					a(href="/", class="nav-link")
+						i(class="fas fa-cubes")
+						span  Latest Blocks
+				if (env.pages.nodeStatus)
 					li(class="nav-item")
-						a(href="/rpc-browser", class="nav-link") RPC Browser
-				if (env.demoSite)
+						a(href="/node-status", class="nav-link")
+							i(class="fas fa-info")
+							span  Node Status
+				if (env.pages.peers)
 					li(class="nav-item")
-						a(href="/rpc-terminal", class="nav-link") RPC Terminal
+						a(href="/peers", class="nav-link")
+							i(class="fas fa-server")
+							span  Peers
+				if (env.pages.rpcBrowser)
+					li(class="nav-item")
+						a(href="/rpc-browser", class="nav-link")
+							i(class="fas fa-book")
+							span  RPC Browser
+				if (env.pages.rpcTerminal)
+					li(class="nav-item")
+						a(href="/rpc-terminal", class="nav-link")
+							i(class="fas fa-terminal")
+							span  RPC Terminal
+				if (env.pages.mempool)
+					li(class="nav-item")
+						a(href="/mempool-summary", class="nav-link")
+							i(class="fas fa-database")
+							span  Mempool Summary
+				if (coinConfig.historicalData && coinConfig.historicalData.length > 0 && env.pages.fun)
+					li(class="nav-item")
+						a(href="/fun", class="nav-link")
+							i(class="fas fa-archive")
+							span  #{coinConfig.name} Fun
 				li(class="nav-item")
-					a(href="/mempool-summary", class="nav-link") Mempool Summary
-				if (coinConfig.historicalData && coinConfig.historicalData.length > 0)
-					li(class="nav-item")
-						a(href="/fun", class="nav-link") #{coinConfig.name} Fun
-				li(class="nav-item")
-					a(href="https://oldbcl.truevisionofsatoshi.com/", class="nav-link") Clashic/BCHC
+					a(href="https://oldbcl.truevisionofsatoshi.com/", class="nav-link", target="_blank") Clashic/BCHC
 
 
 			hr
@@ -95,69 +116,59 @@ html
 
 			div(style="margin-bottom: 30px;")
 
-			footer(class="footer bg-dark text-light pt-3 pb-1 px-3", style="margin-top: 50px;")
-				div(class="container")
-					div(class="row")
-						div(class="col-md-6")
-							dl
-								dt Source
+		footer(class="footer bg-dark text-light pt-3 pb-1 px-3", style="margin-top: 50px;")
+			div(class="container")
+				div(class="row")
+					div(class="col-md-6")
+						dl
+							dt Source
+							dd
+								a(href="https://github.com/title-network/rpc-explorer") github.com/title-network/rpc-explorer
+							dt Running Version
+							dd
+								a(href=("https://github.com/title-network/rpc-explorer/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
+								span(style="color: #ccc;")  (#{sourcecodeDate})
+							if (env.demoSite)
+								dt Public Demos
 								dd
-									a(href="https://github.com/title-network/be") github.com/title-network/be
+									if (coinConfig.demoSiteUrl)
+										a(href=coinConfig.demoSiteUrl) #{coinConfig.demoSiteUrl}
+									else
+										a(href="https://btc-explorer.chaintools.io") https://btc-explorer.chaintools.io
+									div(class="mt-2")
+										- var demoSiteCoins = ["BTC", "LTC", "TNET"];
+										each demoSiteCoin in demoSiteCoins
+											a(href=coinConfigs[demoSiteCoin].demoSiteUrl, class="mr-2")
+												img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".png") class="coin-logo")
+										a(href="https://lightning.chaintools.io", class="mr-2")
+											img(src=("/img/logo/lightning.svg"), class="coin-logo")
+					div(class="col-md-6 text-md-right")
+						dl
+							dt Support Development of #{coinConfig.siteTitle}
+							dd
+								div
+									each coin, index in env.donationAddresses.coins
+										div(style="display: inline-block;", class="text-center mb-3", class=(index > 0 ? "ml-md-3" : false))
+											img(src=donationAddressQrCodeUrls[coin], alt=env.donationAddresses[coin].address, style="border: solid 1px #ccc;")
+											br
+											if (env.donationAddresses[coin].urlPrefix)
+												span #{coin}: 
+												a(href=(env.donationAddresses[coin].urlPrefix + env.donationAddresses[coin].address)) #{env.donationAddresses[coin].address.substring(0, 10)}...
+											else
+												span #{coin}
 
-								dt Running Version
-								dd
-									a(href=("https://github.com/title-network/be/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
-									span(style="color: #ccc;")  (#{sourcecodeDate})
-
-								if (env.demoSite)
-									dt Public Demos
-									dd
-										if (coinConfig.demoSiteUrl)
-											a(href=coinConfig.demoSiteUrl) #{coinConfig.demoSiteUrl}
-										else
-											a(href="https://btc-explorer.chaintools.io") https://btc-explorer.chaintools.io
-										
-										div(class="mt-2")
-											- var demoSiteCoins = ["BTC", "LTC", "TNET"];
-											each demoSiteCoin in demoSiteCoins
-												a(href=coinConfigs[demoSiteCoin].demoSiteUrl, class="mr-2")
-													img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".png") class="coin-logo")
-
-											a(href="https://lightning.chaintools.io", class="mr-2")
-												img(src=("/img/logo/lightning.svg"), class="coin-logo")
-
-						div(class="col-md-6 text-md-right")
-							dl
-								dt Support Development of #{coinConfig.siteTitle}
-								dd
-									div
-										each coin, index in env.donationAddresses.coins
-											div(style="display: inline-block;", class="text-center mb-3", class=(index > 0 ? "ml-md-3" : false))
-												img(src=donationAddressQrCodeUrls[coin], alt=env.donationAddresses[coin].address, style="border: solid 1px #ccc;")
-												br
-												if (env.donationAddresses[coin].urlPrefix)
-													span #{coin}: 
-													a(href=(env.donationAddresses[coin].urlPrefix + env.donationAddresses[coin].address)) #{env.donationAddresses[coin].address.substring(0, 10)}...
-												else
-													span #{coin}
-		
 		script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js", integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ", crossorigin="anonymous")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js", integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb", crossorigin="anonymous")
 		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js", integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm", crossorigin="anonymous")
 		script(defer, src="https://use.fontawesome.com/releases/v5.0.10/js/all.js", integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+", crossorigin="anonymous")
-
 		script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
-		
 		script(src="https://cdn.ravenjs.com/3.22.4/raven.min.js", crossorigin="anonymous")
 		script.
 			Raven.config('https://0bf20e8357a748cab8aa9d35c0f790dd@sentry.io/130800').install();
-			
 			$(document).ready(function() {
 				$('[data-toggle="tooltip"]').tooltip();
 				$('[data-toggle="popover"]').popover({html:true});
 			});
-
 			hljs.initHighlightingOnLoad();
-		
 		block endOfBody
