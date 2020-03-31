@@ -123,10 +123,10 @@ html
 						dl
 							dt Source
 							dd
-								a(href="https://github.com/title-network/rpc-explorer") github.com/title-network/rpc-explorer
+								a(href="https://github.com//Bitcoin-Clashic/rpc-explorer") github.com/Bitcoin-Clashic/rpc-explorer
 							dt Running Version
 							dd
-								a(href=("https://github.com/title-network/rpc-explorer/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
+								a(href=("https://github.com/Bitcoin-Clashic/rpc-explorer/commit/" + sourcecodeVersion)) #{sourcecodeVersion}
 								span(style="color: #ccc;")  (#{sourcecodeDate})
 							if (env.demoSite)
 								dt Public Demos
@@ -136,7 +136,7 @@ html
 									else
 										a(href="https://btc-explorer.chaintools.io") https://btc-explorer.chaintools.io
 									div(class="mt-2")
-										- var demoSiteCoins = ["BTC", "LTC", "TNET"];
+										- var demoSiteCoins = ["BTC", "LTC", "BCHC"];
 										each demoSiteCoin in demoSiteCoins
 											a(href=coinConfigs[demoSiteCoin].demoSiteUrl, class="mr-2")
 												img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".png") class="coin-logo")
